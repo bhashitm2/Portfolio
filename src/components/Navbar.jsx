@@ -36,7 +36,7 @@ const Navbar = ({ onOpenChat }) => {
                 background: scrolled ? "var(--nav-bg)" : "transparent",
                 backdropFilter: scrolled ? "blur(10px)" : "none",
                 borderBottom: scrolled ? "1px solid var(--border-light)" : "none",
-                padding: scrolled ? "1rem 0" : "1.5rem 0",
+                padding: scrolled ? "1.5rem 0" : "2rem 0",
             }}
         >
             <div
@@ -50,9 +50,9 @@ const Navbar = ({ onOpenChat }) => {
                 }}
             >
                 {/* Logo */}
-                <Link to="/" style={{ fontSize: "1.5rem", fontWeight: "700", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                <Link to="/" style={{ fontSize: "2rem", fontWeight: "700", display: "flex", alignItems: "center", gap: "0.5rem" }}>
                     <span style={{ background: "var(--gradient-text)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                        Portfolio.
+                        Bhashit.
                     </span>
                 </Link>
 
@@ -66,7 +66,7 @@ const Navbar = ({ onOpenChat }) => {
                                     className={({ isActive }) => (isActive ? "active-link" : "")}
                                     style={({ isActive }) => ({ 
                                         color: isActive ? "var(--accent-cyan)" : "var(--text-secondary)", 
-                                        fontSize: "0.9rem", 
+                                        fontSize: "1.1rem", 
                                         transition: "color 0.3s",
                                         fontWeight: "500",
                                         textDecoration: "none"
@@ -82,7 +82,7 @@ const Navbar = ({ onOpenChat }) => {
                                 onClick={onOpenChat}
                                 style={{ 
                                     color: "var(--text-secondary)", 
-                                    fontSize: "0.9rem", 
+                                    fontSize: "1.1rem", 
                                     fontWeight: "500",
                                     transition: "color 0.3s"
                                 }}
