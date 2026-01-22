@@ -60,14 +60,9 @@ const ChatConnect = ({ isOpen, onClose }) => {
           botResponse = "You can reach me at bhashitm2@gmail.com.";
           break;
         case "resume":
-          botResponse = "Sure thing! Downloading my resume for you now.";
+          botResponse = "Sure thing! Opening my resume for you now.";
           setTimeout(() => {
-              const link = document.createElement('a');
-              link.href = "/resume.pdf";
-              link.download = "Bhashit_Maheshwari_Resume.pdf";
-              document.body.appendChild(link);
-              link.click();
-              document.body.removeChild(link);
+              window.open("https://drive.google.com/file/d/1kKy1tvYTynxh2UefGfBA0WVgSvoXA6eC/view?usp=drive_link", "_blank");
           }, 1500);
           break;
         default:
