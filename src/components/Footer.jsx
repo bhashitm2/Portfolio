@@ -1,4 +1,4 @@
-import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -7,7 +7,6 @@ const Footer = () => {
          <div style={{ display: "flex", gap: "2rem" }}>
             <a href="https://github.com/bhashitm2" target="_blank" rel="noopener noreferrer" style={{ color: "var(--text-secondary)", fontSize: "1.5rem", transition: "color 0.3s" }}><FaGithub /></a>
             <a href="https://www.linkedin.com/in/bhashit-maheshwari-1b4206254/" target="_blank" rel="noopener noreferrer" style={{ color: "var(--text-secondary)", fontSize: "1.5rem", transition: "color 0.3s" }}><FaLinkedin /></a>
-            <a href="#" style={{ color: "var(--text-secondary)", fontSize: "1.5rem", transition: "color 0.3s" }}><FaTwitter /></a>
          </div>
          <p style={{ color: "var(--text-secondary)", fontSize: "0.9rem" }}>
            © {new Date().getFullYear()} Portfolio. All rights reserved.
