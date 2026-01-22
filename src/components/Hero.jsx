@@ -1,8 +1,21 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { useState } from "react";
+import { FaArrowDown } from "react-icons/fa";
 
 import TypewriterText from "./TypewriterText";
 
 const Hero = () => {
+  const [showScrollIndicator, setShowScrollIndicator] = useState(true);
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    if (latest > 50) {
+      setShowScrollIndicator(false);
+    } else {
+      setShowScrollIndicator(true);
+    }
+  });
+
   return (
     <section 
       id="home"
@@ -103,6 +116,39 @@ const Hero = () => {
 
 
       </div>
+      
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ 
+            opacity: showScrollIndicator ? 1 : 0,
+            y: showScrollIndicator ? [0, 10, 0] : 0, 
+            pointerEvents: showScrollIndicator ? "auto" : "none"
+        }}
+        transition={{ 
+            opacity: { duration: 0.3 },
+            y: { duration: 1.5, repeat: Infinity, delay: 1 } 
+        }}
+        style={{
+            position: "absolute",
+            bottom: "30px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            color: "var(--text-secondary)",
+            gap: "0.5rem",
+            zIndex: 2,
+            cursor: "pointer"
+        }}
+        onClick={() => {
+            const nextSection = document.querySelector('section:nth-of-type(2)');
+            if (nextSection) {
+                nextSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }}
+      >
+        <span style={{ fontSize: "0.8rem", letterSpacing: "3px", textTransform: "uppercase" }}>Scroll Down</span>
+        <FaArrowDown style={{ fontSize: "1.2rem" }} />
+      </motion.div>
     </section>
   );
 };
