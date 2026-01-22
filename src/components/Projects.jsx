@@ -5,6 +5,9 @@ import { VscVscode } from "react-icons/vsc";
 import otakuWorldImg from "../assets/projects/otaku-world.png";
 import precookImg from "../assets/projects/precook-recipe.png";
 import ticTacToeImg from "../assets/projects/tic-tac-toe.png";
+import movieMateImg from "../assets/projects/movie-mate.png";
+import chatAppImg from "../assets/projects/chat-app.png";
+import portfolioImg from "../assets/projects/portfolio.png";
 
 const skills = [
   { name: "C++", color: "#00599C", Icon: SiCplusplus },
@@ -56,6 +59,36 @@ const projects = [
         live: "https://bhashitm2.github.io/Tic_Tac_Toe/game.html" 
     },
     image: ticTacToeImg
+  },
+  {
+    title: "Movie Mate",
+    description: "A feature-rich movie exploration app offering trending lists, genre-based browsing, and detailed information using the TMDB API, wrapped in a responsive, dark-themed UI.",
+    tech: ["React", "TMDB API", "Tailwind", "Vercel"],
+    links: { 
+        github: "https://github.com/bhashitm2/Movie_Mate", 
+        live: "https://movie-mate-eta-livid.vercel.app/" 
+    },
+    image: movieMateImg
+  },
+  {
+    title: "Chat Application",
+    description: "A real-time messaging platform enabling instant communication with a sleek UI, powered by Socket.io for seamless low-latency message delivery.",
+    tech: ["React", "Node.js", "Socket.io", "Render"],
+    links: { 
+        github: "https://github.com/bhashitm2/Chat_Application", 
+        live: "https://chat-application-o1e2.onrender.com/" 
+    },
+    image: chatAppImg
+  },
+  {
+    title: "Portfolio",
+    description: "The very site you are looking at! A personal showcase built with modern web technologies, featuring smooth animations, a responsive design, and a custom theme system.",
+    tech: ["React", "Framer Motion", "Vite", "CSS Modules"],
+    links: { 
+        github: "https://github.com/bhashitm2/Portfolio", 
+        live: "https://bhashit.vercel.app/" 
+    },
+    image: portfolioImg
   }
 ];
 
