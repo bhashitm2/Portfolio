@@ -12,18 +12,18 @@ const skills = [
   { name: "HTML5", color: "#E34F26", Icon: FaHtml5 },
   { name: "CSS3", color: "#1572B6", Icon: FaCss3Alt },
   { name: "React", color: "#61DAFB", Icon: FaReact },
-  { name: "Express.js", color: "#ffffff", Icon: SiExpress }, 
-  { name: "Socket.io", color: "#ffffff", Icon: SiSocketdotio },
+  { name: "Express.js", color: "var(--text-primary)", Icon: SiExpress }, 
+  { name: "Socket.io", color: "var(--text-primary)", Icon: SiSocketdotio },
   { name: "Tailwind CSS", color: "#06B6D4", Icon: SiTailwindcss },
   { name: "MongoDB", color: "#47A248", Icon: SiMongodb },
   { name: "Firebase", color: "#FFCA28", Icon: SiFirebase },
   { name: "Git", color: "#F05032", Icon: FaGitAlt },
-  { name: "GitHub", color: "#ffffff", Icon: FaGithub },
+  { name: "GitHub", color: "var(--text-primary)", Icon: FaGithub },
   { name: "VS Code", color: "#007ACC", Icon: VscVscode },
   { name: "Postman", color: "#FF6C37", Icon: SiPostman },
   { name: "Netlify", color: "#00C7B7", Icon: SiNetlify },
-  { name: "Render", color: "#ffffff", Icon: SiRender },
-  { name: "Unreal Engine", color: "#ffffff", Icon: SiUnrealengine },
+  { name: "Render", color: "var(--text-primary)", Icon: SiRender },
+  { name: "Unreal Engine", color: "var(--text-primary)", Icon: SiUnrealengine },
 ];
 
 const projects = [
@@ -175,19 +175,19 @@ const Projects = () => {
                         scale: 1.15, 
                         y: -5, 
                         borderColor: skill.color, 
-                        boxShadow: `0 0 25px ${skill.color}60`,
-                        background: "rgba(255,255,255,0.05)"
+                        boxShadow: `0 0 25px ${skill.color.startsWith("var") ? "var(--text-secondary)" : skill.color + "60"}`,
+                        background: "var(--bg-card-hover)"
                     }}
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
                     style={{ 
                         display: "flex", 
                         alignItems: "center", 
                         justifyContent: "center",
-                        background: "rgba(255,255,255,0.02)",
+                        background: "var(--bg-card)",
                         width: "100px",
                         height: "100px",
                         borderRadius: "50%",
-                        border: "1px solid rgba(255,255,255,0.05)",
+                        border: "1px solid var(--border-light)",
                         cursor: "pointer",
                         backdropFilter: "blur(5px)",
                         color: skill.color
