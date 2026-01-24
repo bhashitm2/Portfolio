@@ -52,7 +52,7 @@ const Navbar = ({ onOpenChat }) => {
                 {/* Logo */}
                 <Link to="/" style={{ fontSize: "2rem", fontWeight: "700", display: "flex", alignItems: "center", gap: "0.5rem" }}>
                     <span style={{ background: "var(--gradient-text)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                        Bhashit.
+                        Bhashit Maheshwari.
                     </span>
                 </Link>
 

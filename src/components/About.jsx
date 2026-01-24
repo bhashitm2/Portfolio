@@ -32,7 +32,7 @@ const About = () => {
   };
 
   const text1 = "I'm ";
-  const text2 = "Bhashit.";
+  const text2 = "Bhashit Maheshwari.";
 
   return (
     <section 
@@ -131,6 +131,24 @@ const About = () => {
              </div>
           </motion.div>
 
+          {/* Section Title */}
+          <motion.h3
+             initial={{ opacity: 0, y: 20 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             viewport={{ once: true }}
+             transition={{ duration: 0.8, delay: 0.3 }}
+             style={{ 
+                fontSize: "2.5rem",
+                fontWeight: "700",
+                color: "var(--text-primary)",
+                marginTop: "6rem",
+                marginBottom: "3rem",
+                textAlign: "center"
+             }}
+          >
+            How I Approach Projects
+          </motion.h3>
+
           {/* Candidate Strengths Grid */}
           <motion.div
              initial={{ opacity: 0, y: 40 }}
@@ -138,7 +156,7 @@ const About = () => {
              viewport={{ once: true }}
              transition={{ duration: 0.8, delay: 0.5 }}
              style={{ 
-                marginTop: "6rem",
+                marginTop: "0",
                 display: "grid", 
                 gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", 
                 gap: "4rem",

@@ -182,7 +182,7 @@ const Projects = () => {
           ))}
         </div>
 
-        {/* Technical Skills Section */}
+      {/* Technical Skills Section */}
         <motion.div
            initial={{ opacity: 0, y: 30 }}
            whileInView={{ opacity: 1, y: 0 }}
@@ -193,43 +193,44 @@ const Projects = () => {
             Technical <span style={{ color: "var(--accent-purple)" }}>Skills</span>
           </h3>
           
-          <div style={{ 
-              display: "grid", 
-              gridTemplateColumns: "repeat(auto-fit, minmax(100px, 1fr))", 
-              gap: "1.5rem",
-              justifyItems: "center",
-              maxWidth: "100%",
-              margin: "0 auto"
-          }}>
-            {skills.map((skill, index) => (
-                <motion.div 
-                    key={index}
-                    whileHover={{ 
-                        scale: 1.15, 
-                        y: -5, 
-                        borderColor: skill.color, 
-                        boxShadow: `0 0 25px ${skill.color.startsWith("var") ? "var(--text-secondary)" : skill.color + "60"}`,
-                        background: "var(--bg-card-hover)"
-                    }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                    style={{ 
-                        display: "flex", 
-                        alignItems: "center", 
-                        justifyContent: "center",
-                        background: "var(--bg-card)",
-                        width: "100px",
-                        height: "100px",
-                        borderRadius: "50%",
-                        border: "1px solid var(--border-light)",
-                        cursor: "pointer",
-                        backdropFilter: "blur(5px)",
-                        color: skill.color
-                    }}
-                    title={skill.name}
-                >
-                    <skill.Icon size="3.5rem" />
-                </motion.div>
-            ))}
+          <div style={{ display: "flex", width: "100%", overflow: "hidden" }}>
+             <motion.div 
+                 className="marquee-content"
+                 animate={{ x: [0, -1000] }}
+                 transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
+                 style={{ display: "flex", gap: "3rem", paddingLeft: "3rem" }}
+             >
+                 {[...skills, ...skills].map((skill, index) => (
+                     <div 
+                         key={index} 
+                         title={skill.name}
+                         style={{ 
+                             display: "flex", 
+                             flexDirection: "column", 
+                             alignItems: "center", 
+                             justifyContent: "center",
+                             background: "var(--bg-card)",
+                             width: "110px",
+                             height: "110px",
+                             borderRadius: "50%",
+                             border: "1px solid var(--border-light)",
+                             boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)"
+                         }}
+                     >
+                         <div style={{ 
+                             fontSize: "3.5rem", 
+                             display: "flex", 
+                             alignItems: "center", 
+                             justifyContent: "center",
+                             width: "100%",
+                             height: "100%",
+                             lineHeight: 0 
+                         }}>
+                             <skill.Icon size="3.5rem" color={skill.color} />
+                         </div>
+                     </div>
+                 ))}
+             </motion.div>
           </div>
         </motion.div>
       </div>
