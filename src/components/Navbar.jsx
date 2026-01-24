@@ -20,6 +20,7 @@ const Navbar = ({ onOpenChat }) => {
     const navLinks = [
         { title: "Home", href: "/" },
         { title: "About Me", href: "/about" },
+        { title: "Experience", href: "/experience" },
         { title: "Projects", href: "/projects" },
         // Connect is handled separately or specially
     ];

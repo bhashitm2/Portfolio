@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import AboutPage from './pages/AboutPage';
+import ExperiencePage from './pages/ExperiencePage';
 import ProjectsPage from './pages/ProjectsPage';
 import Preloader from './components/Preloader';
 import ChatConnect from './components/ChatConnect';
@@ -43,6 +44,7 @@ const App = () => {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<AboutPage />} />
+                <Route path="/experience" element={<ExperiencePage />} />
                 <Route path="/projects" element={<ProjectsPage />} />
             </Routes>
             <ChatConnect isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
