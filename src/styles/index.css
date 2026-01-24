@@ -29,7 +29,7 @@
   --text-primary: #ffffff;
   --text-secondary: #a1a1aa;
   --border-light: rgba(255, 255, 255, 0.1);
-  --gradient-main: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-pink) 100%);
+  --gradient-main: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-cyan) 100%);
   --gradient-text: linear-gradient(135deg, #fff 0%, #a1a1aa 100%);
   --nav-bg: rgba(10, 10, 10, 0.8);
 }
@@ -43,7 +43,7 @@
   --text-primary: #1a1a1a;
   --text-secondary: #4a4a4a;
   --border-light: rgba(0, 0, 0, 0.1);
-  --gradient-main: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-pink) 100%);
+  --gradient-main: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-cyan) 100%);
   --gradient-text: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%);
   --nav-bg: rgba(255, 255, 255, 0.8);
 }

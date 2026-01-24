@@ -17,27 +17,96 @@ const experiences = [
 ];
 
 const Experience = () => {
+  // Animation Variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.3,
+      },
+    },
+  };
+
+
+  const letterVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { type: "spring", stiffness: 100 }
+    },
+  };
+
+  const contentVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { duration: 0.8, ease: "easeOut", delay: 1.5 } // Delay after title types out
+    }
+  };
+
+  const text1 = "Work ";
+  const text2 = "Experience";
+
   return (
     <section id="experience" style={{ padding: "4rem 2rem", background: "var(--bg-dark)", minHeight: "80vh" }}>
       <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
         <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
             style={{ 
                 fontSize: "3rem", 
                 marginBottom: "4rem", 
                 textAlign: "center",
                 fontWeight: "800",
-                background: "var(--gradient-text)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent"
+                width: "100%"
             }}
         >
-            Work <span style={{ WebkitTextFillColor: "var(--accent-cyan)" }}>Experience</span>
+            {/* First part: Work */}
+            {text1.split("").map((char, index) => (
+                <motion.span 
+                    key={`t1-${index}`} 
+                    variants={letterVariants} 
+                    style={{ 
+                        display: "inline-block", 
+                        whiteSpace: "pre",
+                        background: "var(--gradient-text)", 
+                        WebkitBackgroundClip: "text", 
+                        WebkitTextFillColor: "transparent",
+                     }}
+                >
+                    {char}
+                </motion.span>
+            ))}
+            
+            {/* Second part: Experience (Cyan) */}
+            {text2.split("").map((char, index) => (
+                <motion.span 
+                    key={`t2-${index}`} 
+                    variants={letterVariants} 
+                    style={{ 
+                        display: "inline-block", 
+                        whiteSpace: "pre",
+                        color: "var(--accent-cyan)" 
+                     }}
+                >
+                    {char}
+                </motion.span>
+            ))}
         </motion.h2>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: "3rem" }}>
+        <motion.div 
+            style={{ display: "flex", flexDirection: "column", gap: "3rem" }}
+            variants={contentVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+        >
           {experiences.map((exp, index) => (
             <motion.div
               key={index}
@@ -110,7 +179,7 @@ const Experience = () => {
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

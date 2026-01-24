@@ -40,7 +40,7 @@ const Hero = () => {
             left: "10%", 
             width: "300px", 
             height: "300px", 
-            background: "var(--accent-pink)", 
+            background: "var(--accent-cyan)", 
             filter: "blur(150px)", 
             opacity: 0.2, 
             borderRadius: "50%" 
