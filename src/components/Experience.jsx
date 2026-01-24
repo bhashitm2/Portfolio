@@ -4,7 +4,7 @@ import algoricLogo from "../assets/experience/algoric.png";
 const experiences = [
   {
     company: "Algoric",
-    role: "Frontend Development and Frontend Tester Intern",
+    role: "Frontend Developer",
     date: "June 2025 – August 2025",
     location: "Remote",
     logo: algoricLogo,
@@ -83,8 +83,6 @@ const Experience = () => {
                     {char}
                 </motion.span>
             ))}
-            
-            {/* Second part: Experience (Cyan) */}
             {text2.split("").map((char, index) => (
                 <motion.span 
                     key={`t2-${index}`} 
