@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { FaGithub, FaExternalLinkAlt, FaReact, FaHtml5, FaCss3Alt, FaJs, FaGitAlt, FaNodeJs } from "react-icons/fa";
 import { SiCplusplus, SiTailwindcss, SiMongodb, SiFirebase, SiExpress, SiSocketdotio, SiPostman, SiRender, SiNetlify, SiUnrealengine } from "react-icons/si";
 import { VscVscode } from "react-icons/vsc";
+import nextContestImg from "../assets/projects/next-contest.png";
 import otakuWorldImg from "../assets/projects/otaku-world.png";
 import precookImg from "../assets/projects/precook-recipe.png";
 import ticTacToeImg from "../assets/projects/tic-tac-toe.png";
@@ -30,6 +31,16 @@ const skills = [
 ];
 
 const projects = [
+  {
+    title: "NextContest",
+    description: "A sleek platform for tracking and participating in upcoming coding contests from various providers like LeetCode and Codeforces.",
+    tech: ["Next.js", "React", "Tailwind CSS", "Vercel"],
+    links: { 
+        github: "https://github.com/bhashitm2/NextContest", 
+        live: "https://next-contest.vercel.app" 
+    },
+    image: nextContestImg
+  },
   {
     title: "Otaku World",
     description: "An immersive anime discovery hub featuring real-time trending updates, detailed character insights, and a sleek dark-themed interface for the ultimate fan experience.",
