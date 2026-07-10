@@ -352,7 +352,7 @@ const CodingProfiles = () => {
                         textTransform: "uppercase",
                         letterSpacing: "1px"
                     }}>
-                        ⭐⭐
+                    ⭐⭐⭐
                     </div>
                     <div style={{ marginTop: "1rem", fontSize: "0.9rem", color: "var(--text-secondary)" }}>
                         Max: <span style={{ color: "#1E7D22" }}>1599</span>
