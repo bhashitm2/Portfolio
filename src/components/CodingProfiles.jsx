@@ -77,7 +77,7 @@ const CodingProfiles = () => {
                         boxShadow: "0 10px 30px rgba(0,0,0,0.2)"
                     }}>
                     <h4 style={{ fontSize: "1.5rem", color: "var(--text-primary)" }}>Max Rating</h4>
-                    <div style={{ fontSize: "3.5rem", fontWeight: "700", color: "#FFA116" }}>1883</div>
+                    <div style={{ fontSize: "3.5rem", fontWeight: "700", color: "#FFA116" }}>2006</div>
                     <div style={{ 
                         background: "rgba(255, 161, 22, 0.1)", 
                         color: "#FFA116", 
@@ -165,7 +165,7 @@ const CodingProfiles = () => {
                         boxShadow: "0 10px 30px rgba(0,0,0,0.2)"
                     }}>
                     <h4 style={{ fontSize: "1.5rem", color: "var(--text-primary)" }}>Current Rating</h4>
-                    <div style={{ fontSize: "3.5rem", fontWeight: "700", color: "#03A89E" }}>1493</div>
+                    <div style={{ fontSize: "3.5rem", fontWeight: "700", color: "#11cb3dff" }}>1365</div>
                     <div style={{ 
                         background: "rgba(3, 168, 158, 0.1)", 
                         color: "#03A89E", 
@@ -254,7 +254,7 @@ const CodingProfiles = () => {
                         boxShadow: "0 10px 30px rgba(0,0,0,0.2)"
                     }}>
                     <h4 style={{ fontSize: "1.5rem", color: "var(--text-primary)" }}>Current Rating</h4>
-                    <div style={{ fontSize: "3.5rem", fontWeight: "700", color: "#804000" }}>618</div>
+                    <div style={{ fontSize: "3.5rem", fontWeight: "700", color: "#804000" }}>711</div>
                     <div style={{ 
                         background: "rgba(128, 64, 0, 0.1)", 
                         color: "#804000", 
@@ -342,7 +342,7 @@ const CodingProfiles = () => {
                         boxShadow: "0 10px 30px rgba(0,0,0,0.2)"
                     }}>
                     <h4 style={{ fontSize: "1.5rem", color: "var(--text-primary)" }}>Current Rating</h4>
-                    <div style={{ fontSize: "3.5rem", fontWeight: "700", color: "#1E7D22" }}>1599</div>
+                    <div style={{ fontSize: "3.5rem", fontWeight: "700", color: "#18b6bbff" }}>1619</div>
                     <div style={{ 
                         background: "rgba(30, 125, 34, 0.1)", 
                         color: "#1E7D22", 
