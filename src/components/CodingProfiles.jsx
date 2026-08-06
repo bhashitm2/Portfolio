@@ -13,6 +13,12 @@ const PROFILES = [
     ratingColor: "#FFA116",
     rankColor: "#FFA116",
     borderColor: "#FFA116",
+    rankColors: {
+      "Contest participant": "#808080",
+      Knight: "#FFA116",
+      Guardian: "#FFB800",
+      Unrated: "#808080",
+    },
     primaryField: "maxRating",
     primaryLabel: "Max Rating",
     profileUrl: "https://leetcode.com/Kakarotto007/",
@@ -26,6 +32,19 @@ const PROFILES = [
     ratingColor: "#11cb3d",
     rankColor: "#03A89E",
     borderColor: "var(--accent-cyan)",
+    rankColors: {
+      Newbie: "#808080",
+      Pupil: "#008000",
+      Specialist: "#03A89E",
+      Expert: "#0000FF",
+      "Candidate Master": "#AA00AA",
+      Master: "#FF8C00",
+      "International Master": "#FF8C00",
+      Grandmaster: "#FF0000",
+      "International Grandmaster": "#FF0000",
+      "Legendary Grandmaster": "#FF0000",
+      Unrated: "#808080",
+    },
     primaryField: "currentRating",
     primaryLabel: "Current Rating",
     profileUrl: "https://codeforces.com/profile/Kakarotto007",
@@ -39,6 +58,17 @@ const PROFILES = [
     ratingColor: "#804000",
     rankColor: "#804000",
     borderColor: "#804000",
+    rankColors: {
+      Gray: "#808080",
+      Brown: "#804000",
+      Green: "#008000",
+      Cyan: "#00C0C0",
+      Blue: "#0000FF",
+      Yellow: "#C0C000",
+      Orange: "#FF8000",
+      Red: "#FF0000",
+      Unrated: "#808080",
+    },
     primaryField: "currentRating",
     primaryLabel: "Current Rating",
     profileUrl: "https://atcoder.jp/users/Kakarotto007",
@@ -52,6 +82,16 @@ const PROFILES = [
     ratingColor: "#18b6bb",
     rankColor: "#1E7D22",
     borderColor: "#1E7D22",
+    rankColors: {
+      "★": "#666666",
+      "★★": "#1E7D22",
+      "★★★": "#3366CC",
+      "★★★★": "#684273",
+      "★★★★★": "#FFBF00",
+      "★★★★★★": "#FF0000",
+      "★★★★★★★": "#000000",
+      Unrated: "#808080",
+    },
     primaryField: "currentRating",
     primaryLabel: "Current Rating",
     profileUrl: "https://www.codechef.com/users/kakarotto007",
@@ -85,6 +125,9 @@ const MotionDiv = motion.div;
 const ProfileCard = ({ profile, stats, isLoading }) => {
   const Icon = profile.icon;
   const isAvailable = stats?.available;
+  const rankColor = profile.rankColors?.[stats?.rank] ?? profile.rankColor;
+  const accentColor = profile.rankColors ? rankColor : profile.ratingColor;
+  const borderColor = profile.rankColors ? rankColor : profile.borderColor;
   const primaryRating = stats?.[profile.primaryField];
   const secondaryField =
     profile.primaryField === "maxRating" ? "currentRating" : "maxRating";
@@ -142,7 +185,7 @@ const ProfileCard = ({ profile, stats, isLoading }) => {
           style={{
             ...cardFaceStyle,
             transform: "rotateY(180deg)",
-            border: `1px solid ${profile.borderColor}`,
+            border: `1px solid ${borderColor}`,
           }}
         >
           <h4 style={{ fontSize: "1.5rem", color: "var(--text-primary)" }}>
@@ -150,14 +193,14 @@ const ProfileCard = ({ profile, stats, isLoading }) => {
           </h4>
           <div
             aria-live="polite"
-            style={{ fontSize: "3.5rem", fontWeight: "700", color: profile.ratingColor }}
+            style={{ fontSize: "3.5rem", fontWeight: "700", color: accentColor }}
           >
             {isLoading ? "…" : formatRating(primaryRating)}
           </div>
           <div
             style={{
-              background: `${profile.rankColor}1A`,
-              color: profile.rankColor,
+              background: `${rankColor}1A`,
+              color: rankColor,
               padding: "0.5rem 1.5rem",
               borderRadius: "50px",
               fontWeight: "600",
@@ -172,7 +215,7 @@ const ProfileCard = ({ profile, stats, isLoading }) => {
           </div>
           {isAvailable && secondaryRating !== null && secondaryRating !== undefined && (
             <div style={{ marginTop: "1rem", fontSize: "0.9rem", color: "var(--text-secondary)" }}>
-              {secondaryLabel}: <span style={{ color: profile.rankColor }}>{formatRating(secondaryRating)}</span>
+              {secondaryLabel}: <span style={{ color: rankColor }}>{formatRating(secondaryRating)}</span>
             </div>
           )}
           {!isLoading && !isAvailable && (
