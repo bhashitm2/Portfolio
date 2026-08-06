@@ -19,6 +19,7 @@ const Hero = () => {
   return (
     <section 
       id="home"
+      className="hero-section"
       style={{
         minHeight: "100vh",
         display: "flex",
@@ -63,8 +64,9 @@ const Hero = () => {
         />
       </div>
 
-      <div style={{ maxWidth: "1200px", width: "100%", padding: "0 2rem", zIndex: 1, textAlign: "center" }}>
+      <div className="hero-content" style={{ maxWidth: "1200px", width: "100%", padding: "0 2rem", zIndex: 1, textAlign: "center" }}>
         <motion.h2 
+          className="hero-eyebrow"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -81,8 +83,9 @@ const Hero = () => {
         </motion.h2>
 
         <h1 
+          className="hero-title"
           style={{ 
-            fontSize: "clamp(3rem, 8vw, 6rem)", 
+            fontSize: "clamp(2.5rem, 8vw, 6rem)",
             fontWeight: "700", 
             lineHeight: 1.1,
             marginBottom: "1.5rem",
@@ -95,11 +98,15 @@ const Hero = () => {
             WebkitBackgroundClip: "text", 
             WebkitTextFillColor: "transparent" 
           }}>
-             <TypewriterText text="Digital Experiences" delay={0.6} />
+             <TypewriterText text="Digital" delay={0.6} />
+             <span className="desktop-title-space"> </span>
+             <br className="mobile-title-break" />
+             <TypewriterText className="hero-experiences" text="Experiences" delay={1} />
           </span>
         </h1>
 
         <motion.p 
+          className="hero-description"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}

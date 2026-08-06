@@ -4,9 +4,9 @@ import Globe3D from "./Globe3D";
 
 const Journey = () => {
   return (
-    <section id="journey" style={{ padding: "6rem 2rem", background: "var(--bg-dark)" }}>
+    <section id="journey" className="content-section journey-section" style={{ padding: "6rem 2rem", background: "var(--bg-dark)" }}>
        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <div style={{ 
+          <div className="journey-grid" style={{
               display: "grid", 
               gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))", 
               gap: "4rem",
@@ -27,7 +27,7 @@ const Journey = () => {
                   <p style={{ color: "var(--text-secondary)", marginBottom: "2rem", fontSize: "1.1rem" }}>
                     Udaipur, Rajasthan
                   </p>
-                  <div style={{ padding: "0", background: "var(--bg-card)", borderRadius: "var(--radius-lg)", overflow: "hidden", height: "400px" }}>
+                  <div className="globe-card" style={{ padding: "0", background: "var(--bg-card)", borderRadius: "var(--radius-lg)", overflow: "hidden", height: "400px" }}>
                     <Globe3D />
                   </div>
               </motion.div>

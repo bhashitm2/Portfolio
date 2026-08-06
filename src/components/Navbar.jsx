@@ -4,6 +4,12 @@ import { FaBars, FaTimes, FaSun, FaMoon } from "react-icons/fa";
 import { useTheme } from "../context/ThemeContext";
 import { NavLink, Link } from "react-router-dom";
 
+const menuVariants = {
+    hidden: { opacity: 0, y: -12 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.2 } },
+    exit: { opacity: 0, y: -12, transition: { duration: 0.15 } },
+};
+
 const Navbar = ({ onOpenChat }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
@@ -27,6 +33,7 @@ const Navbar = ({ onOpenChat }) => {
 
     return (
         <nav
+            className="site-nav"
             style={{
                 position: "fixed",
                 top: 0,
@@ -41,6 +48,7 @@ const Navbar = ({ onOpenChat }) => {
             }}
         >
             <div
+                className="site-nav__content"
                 style={{
                     maxWidth: "1200px",
                     margin: "0 auto",
@@ -51,14 +59,14 @@ const Navbar = ({ onOpenChat }) => {
                 }}
             >
                 {/* Logo */}
-                <Link to="/" style={{ fontSize: "2rem", fontWeight: "700", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                <Link className="site-nav__brand" to="/" style={{ fontSize: "2rem", fontWeight: "700", display: "flex", alignItems: "center", gap: "0.5rem" }}>
                     <span style={{ background: "var(--gradient-text)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
                         Bhashit Maheshwari.
                     </span>
                 </Link>
 
                 {/* Desktop Links */}
-                <div style={{ display: "flex", alignItems: "center", gap: "2rem" }}>
+                <div className="site-nav__actions" style={{ display: "flex", alignItems: "center", gap: "2rem" }}>
                     <ul className="desktop-menu" style={{ display: "flex", gap: "2rem", listStyle: "none", margin: 0, padding: 0 }}>
                     {navLinks.map((link) => (
                             <li key={link.title}>
@@ -97,6 +105,7 @@ const Navbar = ({ onOpenChat }) => {
 
                     {/* Theme Toggle */}
                     <button 
+                        className="site-nav__theme-toggle"
                         onClick={toggleTheme}
                         style={{
                             fontSize: "1.2rem",
@@ -117,9 +126,17 @@ const Navbar = ({ onOpenChat }) => {
                     </button>
 
                     {/* Mobile Menu Button */}
-                    <div className="mobile-toggle" onClick={() => setIsOpen(!isOpen)} style={{ cursor: "pointer", fontSize: "1.5rem", color: "var(--text-primary)", marginLeft: "1rem" }}>
+                    <button
+                        type="button"
+                        className="mobile-toggle"
+                        aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+                        aria-expanded={isOpen}
+                        aria-controls="mobile-navigation"
+                        onClick={() => setIsOpen(!isOpen)}
+                        style={{ cursor: "pointer", fontSize: "1.5rem", color: "var(--text-primary)", marginLeft: "1rem" }}
+                    >
                         {isOpen ? <FaTimes /> : <FaBars />}
-                    </div>
+                    </button>
                 </div>
             </div>
 
@@ -127,6 +144,8 @@ const Navbar = ({ onOpenChat }) => {
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
+                        id="mobile-navigation"
+                        className="mobile-menu"
                         variants={menuVariants}
                         initial="hidden"
                         animate="visible"

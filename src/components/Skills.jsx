@@ -23,15 +23,19 @@ const skills = [
   { name: "Unreal Engine", color: "var(--text-primary)", Icon: SiUnrealengine },
 ];
 
+const MotionDiv = motion.div;
+
 const Skills = () => {
+  const mobileSkills = [...skills, ...skills];
+
   return (
-    <section id="skills" style={{ padding: "4rem 0", background: "var(--bg-dark)", overflow: "hidden" }}>
-      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 2rem" }}>
+    <section id="skills" className="skills-section" style={{ padding: "4rem 0", background: "var(--bg-dark)", overflow: "hidden" }}>
+      <div className="skills-content" style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 2rem" }}>
       <h3 style={{ textAlign: "center", fontSize: "2rem", marginBottom: "3rem", color: "var(--text-primary)" }}>
         Technical <span style={{ color: "var(--accent-purple)" }}>Skills</span>
       </h3>
       
-      <div style={{ 
+      <div className="skills-grid" style={{
           display: "grid", 
           gridTemplateColumns: "repeat(auto-fit, minmax(100px, 1fr))", 
           gap: "1.5rem",
@@ -40,7 +44,8 @@ const Skills = () => {
           margin: "0 auto"
       }}>
         {skills.map((skill, index) => (
-            <motion.div 
+            <MotionDiv
+                className="skill-icon-card"
                 key={index}
                 whileHover={{ 
                     scale: 1.15, 
@@ -66,8 +71,28 @@ const Skills = () => {
                 title={skill.name}
             >
                 <skill.Icon size="3.5rem" />
-            </motion.div>
+            </MotionDiv>
         ))}
+      </div>
+
+      <div className="mobile-skills-marquee" aria-label="Technical skills carousel">
+        <MotionDiv
+          className="mobile-skills-track"
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+        >
+          {mobileSkills.map((skill, index) => (
+            <div
+              className="mobile-skill-card"
+              key={`${skill.name}-${index}`}
+              title={skill.name}
+              style={{ color: skill.color }}
+            >
+              <skill.Icon size="3rem" />
+              <span>{skill.name}</span>
+            </div>
+          ))}
+        </MotionDiv>
       </div>
       </div>
     </section>

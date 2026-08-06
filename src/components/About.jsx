@@ -31,12 +31,16 @@ const About = () => {
     }
   };
 
-  const text1 = "I'm ";
-  const text2 = "Bhashit Maheshwari.";
+  const titleWords = [
+    { text: "I'm", accent: false },
+    { text: "Bhashit", accent: true },
+    { text: "Maheshwari.", accent: true },
+  ];
 
   return (
     <section 
       id="about" 
+      className="content-section about-section"
       style={{ 
         padding: "8rem 2rem", 
         background: "var(--bg-dark)", 
@@ -46,6 +50,7 @@ const About = () => {
       <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
         {/* Title Container */}
         <motion.h2 
+            className="about-title"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
@@ -59,41 +64,30 @@ const About = () => {
                 lineHeight: "1.1"
             }}
         >
-            {/* First part: I'm */}
-            {text1.split("").map((char, index) => (
-                <motion.span 
-                    key={`t1-${index}`} 
+            {titleWords.map((word, wordIndex) => (
+              <span className="animated-title-word" key={word.text}>
+                {word.text.split("").map((char, index) => (
+                  <motion.span
+                    key={`${wordIndex}-${index}`}
                     variants={letterVariants} 
-                    style={{ 
-                        display: "inline-block", 
-                        whiteSpace: "pre",
-                        background: "var(--gradient-text)", 
-                        WebkitBackgroundClip: "text", 
-                        WebkitTextFillColor: "transparent",
-                     }}
-                >
+                    style={{
+                      display: "inline-block",
+                      color: word.accent ? "var(--accent-cyan)" : undefined,
+                      background: word.accent ? undefined : "var(--gradient-text)",
+                      WebkitBackgroundClip: word.accent ? undefined : "text",
+                      WebkitTextFillColor: word.accent ? undefined : "transparent",
+                    }}
+                  >
                     {char}
-                </motion.span>
-            ))}
-            
-            {/* Second part: Bhashit. (Cyan) */}
-            {text2.split("").map((char, index) => (
-                <motion.span 
-                    key={`t2-${index}`} 
-                    variants={letterVariants} 
-                    style={{ 
-                        display: "inline-block", 
-                        whiteSpace: "pre",
-                        color: "var(--accent-cyan)" 
-                     }}
-                >
-                    {char}
-                </motion.span>
+                  </motion.span>
+                ))}
+              </span>
             ))}
         </motion.h2>
           
         {/* Content Container with Fade In */}
         <motion.div 
+            className="about-content-grid"
             variants={contentVariants}
             initial="hidden"
             whileInView="visible"
@@ -109,7 +103,7 @@ const About = () => {
              <div style={{ display: "none" }}></div> 
 
              <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem", gridColumn: "1 / -1" }}>
-                <h3 style={{ 
+                <h3 className="about-intro-title" style={{
                     fontSize: "2.5rem", 
                     fontWeight: "700", 
                     lineHeight: "1.2",
@@ -133,6 +127,7 @@ const About = () => {
 
           {/* Section Title */}
           <motion.h3
+             className="about-approach-title"
              initial={{ opacity: 0, y: 20 }}
              whileInView={{ opacity: 1, y: 0 }}
              viewport={{ once: true }}
@@ -151,6 +146,7 @@ const About = () => {
 
           {/* Candidate Strengths Grid */}
           <motion.div
+             className="about-strengths-grid"
              initial={{ opacity: 0, y: 40 }}
              whileInView={{ opacity: 1, y: 0 }}
              viewport={{ once: true }}

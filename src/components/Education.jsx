@@ -21,11 +21,11 @@ const education = [
 
 const Education = () => {
   return (
-    <div style={{ padding: "2rem" }}>
+    <div className="education-card" style={{ padding: "2rem" }}>
       <h3 style={{ fontSize: "2rem", marginBottom: "2rem", color: "var(--text-primary)" }}>
         My <span style={{ color: "var(--accent-pink)" }}>Education</span>
       </h3>
-      <div style={{ display: "flex", flexDirection: "column", gap: "2rem", borderLeft: "2px solid var(--border-light)", paddingLeft: "2rem" }}>
+      <div className="education-timeline" style={{ display: "flex", flexDirection: "column", gap: "2rem", borderLeft: "2px solid var(--border-light)", paddingLeft: "2rem" }}>
         {education.map((edu, index) => (
           <motion.div 
             key={index}
@@ -36,7 +36,7 @@ const Education = () => {
             style={{ position: "relative" }}
           >
             {/* Dot */}
-            <span style={{ 
+            <span className="education-dot" style={{
                 position: "absolute", 
                 left: "-2.6rem", 
                 top: "0.5rem", 

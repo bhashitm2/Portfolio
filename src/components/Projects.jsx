@@ -106,6 +106,7 @@ const projects = [
 const ProjectCard = ({ project, index }) => {
   return (
     <motion.div
+      className="project-card"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -121,7 +122,7 @@ const ProjectCard = ({ project, index }) => {
       whileHover={{ y: -10, borderColor: "var(--accent-cyan)" }}
     >
       {/* Project Image */}
-      <div style={{ width: "100%", height: "200px", overflow: "hidden" }}>
+      <div className="project-image" style={{ width: "100%", height: "200px", overflow: "hidden" }}>
         <img
           src={project.image}
           alt={project.title}
@@ -131,7 +132,7 @@ const ProjectCard = ({ project, index }) => {
         />
       </div>
 
-      <div style={{ padding: "2rem", display: "flex", flexDirection: "column", flex: 1 }}>
+      <div className="project-content" style={{ padding: "2rem", display: "flex", flexDirection: "column", flex: 1 }}>
         <h3 style={{ fontSize: "1.5rem", marginBottom: "1rem", color: "var(--text-primary)" }}>
           {project.title}
         </h3>
@@ -163,9 +164,10 @@ const ProjectCard = ({ project, index }) => {
 
 const Projects = () => {
   return (
-    <section id="projects" style={{ padding: "8rem 2rem", background: "var(--bg-dark)" }}>
+    <section id="projects" className="content-section projects-section" style={{ padding: "8rem 2rem", background: "var(--bg-dark)" }}>
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
         <motion.h2
+          className="projects-title"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -182,7 +184,7 @@ const Projects = () => {
           Featured <span style={{ WebkitTextFillColor: "var(--accent-pink)" }}>Work</span>
         </motion.h2>
 
-        <div style={{
+        <div className="projects-grid" style={{
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
           gap: "3rem",
@@ -213,6 +215,7 @@ const Projects = () => {
             >
               {[...skills, ...skills].map((skill, index) => (
                 <div
+                  className="marquee-skill"
                   key={index}
                   title={skill.name}
                   style={{

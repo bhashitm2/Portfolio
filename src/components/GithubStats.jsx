@@ -8,6 +8,7 @@ const GithubStats = () => {
   return (
     <div style={{ display: 'flex', justifyContent: 'center', padding: '2rem 0', width: "100%" }}>
         <motion.div
+           className="github-stats-card"
            initial={{ opacity: 0, y: 20 }}
            whileInView={{ opacity: 1, y: 0 }}
            viewport={{ once: true }}
@@ -27,20 +28,24 @@ const GithubStats = () => {
             Github <span style={{ color: "var(--accent-green)" }}>Contributions</span>
           </h3>
           
-          <GitHubCalendar 
-            username="bhashitm2"
-            blockSize={12}
-            blockMargin={5}
-            colorScheme={theme}
-            fontSize={14}
-            theme={{
-                light: ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'],
-                dark: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
-            }}
-            style={{
-                color: "var(--text-secondary)"
-            }}
-          />
+          <div className="github-calendar-scroll" aria-label="GitHub contribution calendar">
+            <div>
+              <GitHubCalendar
+                username="bhashitm2"
+                blockSize={12}
+                blockMargin={5}
+                colorScheme={theme}
+                fontSize={14}
+                theme={{
+                    light: ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'],
+                    dark: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
+                }}
+                style={{
+                    color: "var(--text-secondary)"
+                }}
+              />
+            </div>
+          </div>
         </motion.div>
     </div>
   );

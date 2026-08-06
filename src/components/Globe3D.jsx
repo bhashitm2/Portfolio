@@ -58,7 +58,7 @@ const Globe3D = () => {
   ];
 
   return (
-    <div ref={containerRef} style={{ width: '100%', height: '100%', minHeight: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <div ref={containerRef} className="globe-inner" style={{ width: '100%', height: '100%', minHeight: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       {dimensions.width > 0 && (
           <Globe
             ref={globeEl}

@@ -123,6 +123,7 @@ const cardFaceStyle = {
 const MotionDiv = motion.div;
 
 const ProfileCard = ({ profile, stats, isLoading }) => {
+  const [isFlipped, setIsFlipped] = useState(false);
   const Icon = profile.icon;
   const isAvailable = stats?.available;
   const rankColor = profile.rankColors?.[stats?.rank] ?? profile.rankColor;
@@ -136,9 +137,10 @@ const ProfileCard = ({ profile, stats, isLoading }) => {
   const secondaryRating = stats?.[secondaryField];
 
   return (
-    <div style={{ perspective: "1000px", width: "300px", height: "350px" }}>
+    <div className="profile-card" style={{ perspective: "1000px", width: "min(300px, 100%)", height: "350px" }}>
       <MotionDiv
         initial={false}
+        animate={{ rotateY: isFlipped ? 180 : 0 }}
         whileHover={{ rotateY: 180 }}
         transition={{ duration: 0.6, type: "spring", stiffness: 260, damping: 20 }}
         style={{
@@ -176,9 +178,16 @@ const ProfileCard = ({ profile, stats, isLoading }) => {
               {profile.handle}
             </span>
           </div>
-          <span style={{ fontSize: "0.9rem", color: "var(--accent-cyan)", opacity: 0.8 }}>
+          <span className="profile-card-hint" style={{ fontSize: "0.9rem", color: "var(--accent-cyan)", opacity: 0.8 }}>
             Hover to see live stats
           </span>
+          <button
+            type="button"
+            className="profile-card-toggle"
+            onClick={() => setIsFlipped(true)}
+          >
+            Tap to see live stats
+          </button>
         </div>
 
         <div
@@ -236,6 +245,13 @@ const ProfileCard = ({ profile, stats, isLoading }) => {
           >
             View Profile ↗
           </a>
+          <button
+            type="button"
+            className="profile-card-toggle"
+            onClick={() => setIsFlipped(false)}
+          >
+            Back to profile
+          </button>
         </div>
       </MotionDiv>
     </div>
@@ -280,7 +296,7 @@ const CodingProfiles = () => {
   }, []);
 
   return (
-    <section style={{ padding: "0rem 2rem 4rem", background: "var(--bg-dark)" }}>
+    <section className="coding-profiles-section mobile-section" style={{ padding: "0rem 2rem 4rem", background: "var(--bg-dark)" }}>
       <h3
         style={{
           textAlign: "center",
@@ -308,12 +324,14 @@ const CodingProfiles = () => {
 
       <div style={{ display: "flex", flexDirection: "column", gap: "3rem", alignItems: "center" }}>
         <div
+          className="profile-cards"
           style={{
             display: "flex",
             flexWrap: "wrap",
             gap: "2rem",
             justifyContent: "center",
             alignItems: "center",
+            width: "100%",
           }}
         >
           {PROFILES.map((profile) => (
@@ -327,6 +345,7 @@ const CodingProfiles = () => {
         </div>
 
         <MotionDiv
+          className="coding-heatmap"
           whileHover={{ scale: 1.01 }}
           style={{
             background: "var(--bg-card)",

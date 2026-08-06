@@ -48,13 +48,14 @@ const Experience = () => {
     }
   };
 
-  const text1 = "Work ";
+  const text1 = "Work";
   const text2 = "Experience";
 
   return (
-    <section id="experience" style={{ padding: "4rem 2rem", background: "var(--bg-dark)", minHeight: "80vh" }}>
+    <section id="experience" className="content-section experience-section" style={{ padding: "4rem 2rem", background: "var(--bg-dark)", minHeight: "80vh" }}>
       <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
         <motion.h2 
+            className="experience-title"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
@@ -68,34 +69,36 @@ const Experience = () => {
             }}
         >
             {/* First part: Work */}
-            {text1.split("").map((char, index) => (
-                <motion.span 
-                    key={`t1-${index}`} 
-                    variants={letterVariants} 
-                    style={{ 
-                        display: "inline-block", 
-                        whiteSpace: "pre",
-                        background: "var(--gradient-text)", 
-                        WebkitBackgroundClip: "text", 
-                        WebkitTextFillColor: "transparent",
-                     }}
-                >
-                    {char}
-                </motion.span>
-            ))}
-            {text2.split("").map((char, index) => (
-                <motion.span 
-                    key={`t2-${index}`} 
-                    variants={letterVariants} 
-                    style={{ 
-                        display: "inline-block", 
-                        whiteSpace: "pre",
-                        color: "var(--accent-cyan)" 
-                     }}
-                >
-                    {char}
-                </motion.span>
-            ))}
+            <span className="animated-title-word">
+              {text1.split("").map((char, index) => (
+                  <motion.span
+                      key={`t1-${index}`}
+                      variants={letterVariants}
+                      style={{
+                          display: "inline-block",
+                          background: "var(--gradient-text)",
+                          WebkitBackgroundClip: "text",
+                          WebkitTextFillColor: "transparent",
+                       }}
+                  >
+                      {char}
+                  </motion.span>
+              ))}
+            </span>
+            <span className="animated-title-word">
+              {text2.split("").map((char, index) => (
+                  <motion.span
+                      key={`t2-${index}`}
+                      variants={letterVariants}
+                      style={{
+                          display: "inline-block",
+                          color: "var(--accent-cyan)"
+                       }}
+                  >
+                      {char}
+                  </motion.span>
+              ))}
+            </span>
         </motion.h2>
 
         <motion.div 
@@ -107,6 +110,7 @@ const Experience = () => {
         >
           {experiences.map((exp, index) => (
             <motion.div
+              className="experience-card"
               key={index}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -124,7 +128,7 @@ const Experience = () => {
               }}
               whileHover={{ borderColor: "var(--accent-cyan)", transform: "translateY(-5px)" }}
             >
-              <div style={{ 
+              <div className="experience-logo" style={{
                   flexShrink: 0, 
                   width: "100px", 
                   height: "100px", 
@@ -140,12 +144,12 @@ const Experience = () => {
               </div>
 
               <div style={{ flex: 1 }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "1rem", marginBottom: "1rem" }}>
+                <div className="experience-header" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "1rem", marginBottom: "1rem" }}>
                     <div>
                         <h3 style={{ fontSize: "1.8rem", fontWeight: "700", color: "var(--text-primary)", marginBottom: "0.5rem" }}>{exp.company}</h3>
                         <h4 style={{ fontSize: "1.2rem", color: "var(--accent-cyan)", fontWeight: "600" }}>{exp.role}</h4>
                     </div>
-                    <div style={{ textAlign: "right" }}>
+                    <div className="experience-meta" style={{ textAlign: "right" }}>
                         <span style={{ display: "block", color: "var(--text-primary)", fontWeight: "600", marginBottom: "0.25rem" }}>{exp.date}</span>
                         <span style={{ color: "var(--text-secondary)", fontSize: "0.9rem" }}>{exp.location}</span>
                     </div>

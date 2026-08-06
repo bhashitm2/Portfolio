@@ -12,7 +12,7 @@ const Home = () => {
       <Hero />
       
       {/* GitHub Stats Section */}
-      <section style={{ padding: "0 2rem", background: "linear-gradient(to bottom, var(--bg-dark), var(--bg-card))" }}>
+      <section className="mobile-section" style={{ padding: "0 2rem", background: "linear-gradient(to bottom, var(--bg-dark), var(--bg-card))" }}>
          <GithubStats />
       </section>
 
@@ -21,19 +21,19 @@ const Home = () => {
       <CodingProfiles />
 
       {/* Short Call to Action Section since content is moved */}
-      <section style={{ padding: "4rem 2rem", background: "var(--bg-dark)", textAlign: "center" }}>
+      <section className="mobile-section" style={{ padding: "4rem 2rem", background: "var(--bg-dark)", textAlign: "center" }}>
         <motion.div
            initial={{ opacity: 0, y: 20 }}
            whileInView={{ opacity: 1, y: 0 }}
            viewport={{ once: true }}
         >
-            <h2 style={{ fontSize: "2.5rem", marginBottom: "1rem", color: "var(--text-primary)" }}>
+            <h2 className="home-cta-title" style={{ fontSize: "2.5rem", marginBottom: "1rem", color: "var(--text-primary)" }}>
                 Want to know more?
             </h2>
             <p style={{ color: "var(--text-secondary)", marginBottom: "2rem", fontSize: "1.1rem" }}>
                 Explore my journey, skills, and the projects I've built.
             </p>
-            <div style={{ display: "flex", justifyContent: "center", gap: "1rem" }}>
+            <div className="home-cta-actions" style={{ display: "flex", justifyContent: "center", gap: "1rem" }}>
                 <Link to="/projects" style={{ 
                     display: "flex", 
                     alignItems: "center", 
