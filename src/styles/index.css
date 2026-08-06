@@ -111,6 +111,20 @@ button {
   margin-left: 0.2em;
 }
 
+.about-photo-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.about-photo {
+  width: min(100%, 320px);
+  aspect-ratio: 2 / 3;
+  display: block;
+  object-fit: cover;
+  object-position: center top;
+  background: #000;
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
@@ -355,6 +369,10 @@ button {
   .about-strengths-grid,
   .projects-grid {
     grid-template-columns: 1fr !important;
+  }
+
+  .about-photo {
+    width: min(100%, 260px);
   }
 
   .about-content-grid,

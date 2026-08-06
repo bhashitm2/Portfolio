@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import profilePortrait from "../assets/about/profile-portrait.jpeg";
 
 const About = () => {
   // Animation Variants
@@ -94,15 +95,26 @@ const About = () => {
             viewport={{ once: true }}
             style={{ 
                 display: "grid", 
-                gridTemplateColumns: "1fr 1.5fr", 
+                gridTemplateColumns: "minmax(240px, 0.8fr) 1.5fr",
                 gap: "4rem",
                 alignItems: "center"
             }}
         >
-             {/* Photo Section Placeholder - Left Empty as requested */}
-             <div style={{ display: "none" }}></div> 
+             <motion.div
+                className="about-photo-wrap"
+                initial={{ opacity: 0, scale: 0.94 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.15 }}
+             >
+                <img
+                  className="about-photo"
+                  src={profilePortrait}
+                  alt="Bhashit Maheshwari"
+                />
+             </motion.div>
 
-             <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem", gridColumn: "1 / -1" }}>
+             <div className="about-copy" style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
                 <h3 className="about-intro-title" style={{
                     fontSize: "2.5rem", 
                     fontWeight: "700", 
