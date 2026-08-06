@@ -62,7 +62,7 @@ const ChatConnect = ({ isOpen, onClose }) => {
         case "resume":
           botResponse = "Sure thing! Opening my resume for you now.";
           setTimeout(() => {
-              window.open("https://drive.google.com/file/d/1kKy1tvYTynxh2UefGfBA0WVgSvoXA6eC/view?usp=drive_link", "_blank");
+              window.open("https://drive.google.com/file/d/1Q0S3thdEjhQ03FnumI02QCIFmOCnHD_Q/view?usp=drive_link","_blank",);
           }, 1500);
           break;
         default:
