@@ -1,412 +1,312 @@
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { SiLeetcode, SiCodeforces, SiCodechef } from "react-icons/si";
+import { SiLeetcode, SiCodechef, SiCodeforces } from "react-icons/si";
 import { useTheme } from "../context/ThemeContext";
 
+const PROFILES = [
+  {
+    id: "leetcode",
+    name: "LeetCode",
+    handle: "@Kakarotto007",
+    icon: SiLeetcode,
+    iconColor: "#FFA116",
+    ratingColor: "#FFA116",
+    rankColor: "#FFA116",
+    borderColor: "#FFA116",
+    primaryField: "maxRating",
+    primaryLabel: "Max Rating",
+    profileUrl: "https://leetcode.com/Kakarotto007/",
+  },
+  {
+    id: "codeforces",
+    name: "Codeforces",
+    handle: "@Kakarotto007",
+    icon: SiCodeforces,
+    iconColor: "#1F8ACB",
+    ratingColor: "#11cb3d",
+    rankColor: "#03A89E",
+    borderColor: "var(--accent-cyan)",
+    primaryField: "currentRating",
+    primaryLabel: "Current Rating",
+    profileUrl: "https://codeforces.com/profile/Kakarotto007",
+  },
+  {
+    id: "atcoder",
+    name: "AtCoder",
+    handle: "@Kakarotto007",
+    iconLabel: "⌨️",
+    iconColor: "#fff",
+    ratingColor: "#804000",
+    rankColor: "#804000",
+    borderColor: "#804000",
+    primaryField: "currentRating",
+    primaryLabel: "Current Rating",
+    profileUrl: "https://atcoder.jp/users/Kakarotto007",
+  },
+  {
+    id: "codechef",
+    name: "CodeChef",
+    handle: "@kakarotto007",
+    icon: SiCodechef,
+    iconColor: "#5B4638",
+    ratingColor: "#18b6bb",
+    rankColor: "#1E7D22",
+    borderColor: "#1E7D22",
+    primaryField: "currentRating",
+    primaryLabel: "Current Rating",
+    profileUrl: "https://www.codechef.com/users/kakarotto007",
+  },
+];
+
+const formatRating = (rating) => {
+  const numericRating = Number(rating);
+  return Number.isFinite(numericRating)
+    ? Math.round(numericRating).toLocaleString("en-IN")
+    : "—";
+};
+
+const cardFaceStyle = {
+  position: "absolute",
+  width: "100%",
+  height: "100%",
+  backfaceVisibility: "hidden",
+  background: "var(--bg-card)",
+  borderRadius: "var(--radius-lg)",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: "1rem",
+  boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
+};
+
+const MotionDiv = motion.div;
+
+const ProfileCard = ({ profile, stats, isLoading }) => {
+  const Icon = profile.icon;
+  const isAvailable = stats?.available;
+  const primaryRating = stats?.[profile.primaryField];
+  const secondaryField =
+    profile.primaryField === "maxRating" ? "currentRating" : "maxRating";
+  const secondaryLabel =
+    profile.primaryField === "maxRating" ? "Current" : "Max";
+  const secondaryRating = stats?.[secondaryField];
+
+  return (
+    <div style={{ perspective: "1000px", width: "300px", height: "350px" }}>
+      <MotionDiv
+        initial={false}
+        whileHover={{ rotateY: 180 }}
+        transition={{ duration: 0.6, type: "spring", stiffness: 260, damping: 20 }}
+        style={{
+          width: "100%",
+          height: "100%",
+          position: "relative",
+          transformStyle: "preserve-3d",
+        }}
+      >
+        <div
+          style={{
+            ...cardFaceStyle,
+            border: "1px solid var(--border-light)",
+            gap: "1.5rem",
+          }}
+        >
+          {Icon ? (
+            <Icon color={profile.iconColor} style={{ fontSize: "5rem" }} />
+          ) : (
+            <div style={{ fontSize: "5rem", color: profile.iconColor }}>
+              {profile.iconLabel}
+            </div>
+          )}
+          <div style={{ textAlign: "center" }}>
+            <h4
+              style={{
+                fontSize: "1.8rem",
+                margin: "0 0 0.5rem",
+                color: "var(--text-primary)",
+              }}
+            >
+              {profile.name}
+            </h4>
+            <span style={{ color: "var(--text-secondary)", fontSize: "1.1rem" }}>
+              {profile.handle}
+            </span>
+          </div>
+          <span style={{ fontSize: "0.9rem", color: "var(--accent-cyan)", opacity: 0.8 }}>
+            Hover to see live stats
+          </span>
+        </div>
+
+        <div
+          style={{
+            ...cardFaceStyle,
+            transform: "rotateY(180deg)",
+            border: `1px solid ${profile.borderColor}`,
+          }}
+        >
+          <h4 style={{ fontSize: "1.5rem", color: "var(--text-primary)" }}>
+            {profile.primaryLabel}
+          </h4>
+          <div
+            aria-live="polite"
+            style={{ fontSize: "3.5rem", fontWeight: "700", color: profile.ratingColor }}
+          >
+            {isLoading ? "…" : formatRating(primaryRating)}
+          </div>
+          <div
+            style={{
+              background: `${profile.rankColor}1A`,
+              color: profile.rankColor,
+              padding: "0.5rem 1.5rem",
+              borderRadius: "50px",
+              fontWeight: "600",
+              textTransform: "uppercase",
+              letterSpacing: "1px",
+              minHeight: "2.5rem",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            {isLoading ? "Refreshing" : isAvailable ? stats.rank : "Unavailable"}
+          </div>
+          {isAvailable && secondaryRating !== null && secondaryRating !== undefined && (
+            <div style={{ marginTop: "1rem", fontSize: "0.9rem", color: "var(--text-secondary)" }}>
+              {secondaryLabel}: <span style={{ color: profile.rankColor }}>{formatRating(secondaryRating)}</span>
+            </div>
+          )}
+          {!isLoading && !isAvailable && (
+            <div style={{ marginTop: "1rem", fontSize: "0.85rem", color: "var(--text-secondary)" }}>
+              Couldn&apos;t refresh right now
+            </div>
+          )}
+          <a
+            href={profile.profileUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              marginTop: isAvailable ? "1rem" : "0.25rem",
+              color: "var(--text-primary)",
+              textDecoration: "underline",
+              fontSize: "0.9rem",
+            }}
+          >
+            View Profile ↗
+          </a>
+        </div>
+      </MotionDiv>
+    </div>
+  );
+};
+
 const CodingProfiles = () => {
-    const { theme } = useTheme();
+  const { theme } = useTheme();
+  const [profiles, setProfiles] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasLoadError, setHasLoadError] = useState(false);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    const loadProfiles = async () => {
+      try {
+        const response = await fetch("/api/ratings", { signal: controller.signal });
+        if (!response.ok) throw new Error("Unable to load profile ratings");
+
+        const payload = await response.json();
+        if (!controller.signal.aborted) {
+          const refreshedProfiles = payload.profiles ?? {};
+          setProfiles(refreshedProfiles);
+          setHasLoadError(
+            Object.values(refreshedProfiles).some((profile) => !profile.available),
+          );
+        }
+      } catch (error) {
+        if (error.name !== "AbortError") {
+          setHasLoadError(true);
+        }
+      } finally {
+        if (!controller.signal.aborted) {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    loadProfiles();
+    return () => controller.abort();
+  }, []);
 
   return (
     <section style={{ padding: "0rem 2rem 4rem", background: "var(--bg-dark)" }}>
-      <h3 style={{ textAlign: "center", fontSize: "2rem", marginBottom: "3rem", color: "var(--text-primary)" }}>
-         Programming <span style={{ color: "var(--accent-cyan)" }}>Profiles</span>
+      <h3
+        style={{
+          textAlign: "center",
+          fontSize: "2rem",
+          marginBottom: "0.5rem",
+          color: "var(--text-primary)",
+        }}
+      >
+        Programming <span style={{ color: "var(--accent-cyan)" }}>Profiles</span>
       </h3>
-      
+      <p
+        style={{
+          textAlign: "center",
+          color: "var(--text-secondary)",
+          margin: "0 0 3rem",
+          fontSize: "0.95rem",
+        }}
+      >
+        {isLoading
+          ? "Refreshing live ratings…"
+          : hasLoadError
+            ? "Live ratings are temporarily unavailable."
+            : "Live ratings refresh automatically."}
+      </p>
+
       <div style={{ display: "flex", flexDirection: "column", gap: "3rem", alignItems: "center" }}>
-        
-        {/* Cards Row */}
-        <div style={{ 
-            display: "flex", 
-            flexWrap: "wrap", 
-            gap: "2rem", 
-            justifyContent: "center", 
-            alignItems: "center" 
-        }}>
-            
-            {/* LeetCode Flip Card */}
-            <div style={{ perspective: "1000px", width: "300px", height: "350px" }}>
-                <motion.div
-                    initial={false}
-                    whileHover={{ rotateY: 180 }}
-                    transition={{ duration: 0.6, type: "spring", stiffness: 260, damping: 20 }}
-                    style={{ 
-                        width: "100%", 
-                        height: "100%", 
-                        position: "relative", 
-                        transformStyle: "preserve-3d",
-                    }}
-                >
-                    {/* Front Face */}
-                    <div style={{ 
-                        position: "absolute",
-                        width: "100%",
-                        height: "100%",
-                        backfaceVisibility: "hidden",
-                        background: "var(--bg-card)",
-                        borderRadius: "var(--radius-lg)",
-                        border: "1px solid var(--border-light)",
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        gap: "1.5rem",
-                        boxShadow: "0 10px 30px rgba(0,0,0,0.2)"
-                    }}>
-                        <SiLeetcode color="#FFA116" style={{ fontSize: "5rem" }} />
-                        <div style={{ textAlign: "center" }}>
-                            <h4 style={{ fontSize: "1.8rem", margin: "0 0 0.5rem", color: "var(--text-primary)" }}>LeetCode</h4>
-                            <span style={{ color: "var(--text-secondary)", fontSize: "1.1rem" }}>@Kakarotto007</span>
-                        </div>
-                        <span style={{ fontSize: "0.9rem", color: "var(--accent-cyan)", opacity: 0.8 }}>Hover to see stats</span>
-                    </div>
-
-                    {/* Back Face */}
-                    <div style={{ 
-                        position: "absolute",
-                        width: "100%",
-                        height: "100%",
-                        backfaceVisibility: "hidden",
-                        transform: "rotateY(180deg)",
-                        background: "var(--bg-card)",
-                        borderRadius: "var(--radius-lg)",
-                        border: "1px solid #FFA116",
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        gap: "1rem",
-                        boxShadow: "0 10px 30px rgba(0,0,0,0.2)"
-                    }}>
-                    <h4 style={{ fontSize: "1.5rem", color: "var(--text-primary)" }}>Max Rating</h4>
-                    <div style={{ fontSize: "3.5rem", fontWeight: "700", color: "#FFA116" }}>2006</div>
-                    <div style={{ 
-                        background: "rgba(255, 161, 22, 0.1)", 
-                        color: "#FFA116", 
-                        padding: "0.5rem 1.5rem", 
-                        borderRadius: "50px", 
-                        fontWeight: "600",
-                        textTransform: "uppercase",
-                        letterSpacing: "1px",
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "0.5rem"
-                    }}>
-                        <span>⚔️</span> Knight
-                    </div>
-                    
-                    <a 
-                        href="https://leetcode.com/Kakarotto007/" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        style={{ 
-                            marginTop: "1rem", 
-                            color: "var(--text-primary)", 
-                            textDecoration: "underline",
-                            fontSize: "0.9rem"
-                        }}
-                    >
-                        View Profile ↗
-                    </a>
-                    </div>
-                </motion.div>
-            </div>
-
-            {/* CodeForces Flip Card */}
-            <div style={{ perspective: "1000px", width: "300px", height: "350px" }}>
-                <motion.div
-                    initial={false}
-                    whileHover={{ rotateY: 180 }}
-                    transition={{ duration: 0.6, type: "spring", stiffness: 260, damping: 20 }}
-                    style={{ 
-                        width: "100%", 
-                        height: "100%", 
-                        position: "relative", 
-                        transformStyle: "preserve-3d",
-                    }}
-                >
-                    {/* Front Face */}
-                    <div style={{ 
-                        position: "absolute",
-                        width: "100%",
-                        height: "100%",
-                        backfaceVisibility: "hidden",
-                        background: "var(--bg-card)",
-                        borderRadius: "var(--radius-lg)",
-                        border: "1px solid var(--border-light)",
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        gap: "1.5rem",
-                        boxShadow: "0 10px 30px rgba(0,0,0,0.2)"
-                    }}>
-                        <SiCodeforces color="#1F8ACB" style={{ fontSize: "5rem" }} />
-                        <div style={{ textAlign: "center" }}>
-                            <h4 style={{ fontSize: "1.8rem", margin: "0 0 0.5rem", color: "var(--text-primary)" }}>CodeForces</h4>
-                            <span style={{ color: "var(--text-secondary)", fontSize: "1.1rem" }}>@Kakarotto007</span>
-                        </div>
-                        <span style={{ fontSize: "0.9rem", color: "var(--accent-cyan)", opacity: 0.8 }}>Hover to see stats</span>
-                    </div>
-
-                    {/* Back Face */}
-                    <div style={{ 
-                        position: "absolute",
-                        width: "100%",
-                        height: "100%",
-                        backfaceVisibility: "hidden",
-                        transform: "rotateY(180deg)",
-                        background: "var(--bg-card)", 
-                        borderRadius: "var(--radius-lg)",
-                        border: "1px solid var(--accent-cyan)",
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        gap: "1rem",
-                        boxShadow: "0 10px 30px rgba(0,0,0,0.2)"
-                    }}>
-                    <h4 style={{ fontSize: "1.5rem", color: "var(--text-primary)" }}>Current Rating</h4>
-                    <div style={{ fontSize: "3.5rem", fontWeight: "700", color: "#11cb3dff" }}>1365</div>
-                    <div style={{ 
-                        background: "rgba(3, 168, 158, 0.1)", 
-                        color: "#03A89E", 
-                        padding: "0.5rem 1.5rem", 
-                        borderRadius: "50px", 
-                        fontWeight: "600",
-                        textTransform: "uppercase",
-                        letterSpacing: "1px"
-                    }}>
-                        Specialist
-                    </div>
-                    <div style={{ marginTop: "1rem", fontSize: "0.9rem", color: "var(--text-secondary)" }}>
-                        Max: <span style={{ color: "#03A89E" }}>1493</span>
-                    </div>
-                    
-                    <a 
-                        href="https://codeforces.com/profile/Kakarotto007" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        style={{ 
-                            marginTop: "1rem", 
-                            color: "var(--text-primary)", 
-                            textDecoration: "underline",
-                            fontSize: "0.9rem"
-                        }}
-                    >
-                        View Profile ↗
-                    </a>
-                    </div>
-                </motion.div>
-            </div>
-
-            {/* AtCoder Flip Card */}
-            <div style={{ perspective: "1000px", width: "300px", height: "350px" }}>
-                <motion.div
-                    initial={false}
-                    whileHover={{ rotateY: 180 }}
-                    transition={{ duration: 0.6, type: "spring", stiffness: 260, damping: 20 }}
-                    style={{ 
-                        width: "100%", 
-                        height: "100%", 
-                        position: "relative", 
-                        transformStyle: "preserve-3d",
-                    }}
-                >
-                    {/* Front Face */}
-                    <div style={{ 
-                        position: "absolute",
-                        width: "100%",
-                        height: "100%",
-                        backfaceVisibility: "hidden",
-                        background: "var(--bg-card)",
-                        borderRadius: "var(--radius-lg)",
-                        border: "1px solid var(--border-light)",
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        gap: "1.5rem",
-                        boxShadow: "0 10px 30px rgba(0,0,0,0.2)"
-                    }}>
-                        {/* Using FaCode as placeholder or styled text since SiAtcoder might be missing */}
-                        <div style={{ fontSize: "5rem", color: "#fff" }}>⌨️</div> 
-                        <div style={{ textAlign: "center" }}>
-                            <h4 style={{ fontSize: "1.8rem", margin: "0 0 0.5rem", color: "var(--text-primary)" }}>AtCoder</h4>
-                            <span style={{ color: "var(--text-secondary)", fontSize: "1.1rem" }}>@Kakarotto007</span>
-                        </div>
-                        <span style={{ fontSize: "0.9rem", color: "var(--accent-cyan)", opacity: 0.8 }}>Hover to see stats</span>
-                    </div>
-
-                    {/* Back Face */}
-                    <div style={{ 
-                        position: "absolute",
-                        width: "100%",
-                        height: "100%",
-                        backfaceVisibility: "hidden",
-                        transform: "rotateY(180deg)",
-                        background: "var(--bg-card)", 
-                        borderRadius: "var(--radius-lg)",
-                        border: "1px solid #804000",
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        gap: "1rem",
-                        boxShadow: "0 10px 30px rgba(0,0,0,0.2)"
-                    }}>
-                    <h4 style={{ fontSize: "1.5rem", color: "var(--text-primary)" }}>Current Rating</h4>
-                    <div style={{ fontSize: "3.5rem", fontWeight: "700", color: "#804000" }}>711</div>
-                    <div style={{ 
-                        background: "rgba(128, 64, 0, 0.1)", 
-                        color: "#804000", 
-                        padding: "0.5rem 1.5rem", 
-                        borderRadius: "50px", 
-                        fontWeight: "600",
-                        textTransform: "uppercase",
-                        letterSpacing: "1px"
-                    }}>
-                        7 Kyu
-                    </div>
-                    <div style={{ marginTop: "1rem", fontSize: "0.9rem", color: "var(--text-secondary)" }}>
-                        Max: <span style={{ color: "#804000" }}>618</span>
-                    </div>
-                    
-                    <a 
-                        href="https://atcoder.jp/users/Kakarotto007" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        style={{ 
-                            marginTop: "1rem", 
-                            color: "var(--text-primary)", 
-                            textDecoration: "underline",
-                            fontSize: "0.9rem"
-                        }}
-                    >
-                        View Profile ↗
-                    </a>
-                    </div>
-                </motion.div>
-            </div>
-
-            {/* CodeChef Flip Card */}
-            <div style={{ perspective: "1000px", width: "300px", height: "350px" }}>
-                <motion.div
-                    initial={false}
-                    whileHover={{ rotateY: 180 }}
-                    transition={{ duration: 0.6, type: "spring", stiffness: 260, damping: 20 }}
-                    style={{ 
-                        width: "100%", 
-                        height: "100%", 
-                        position: "relative", 
-                        transformStyle: "preserve-3d",
-                    }}
-                >
-                    {/* Front Face */}
-                    <div style={{ 
-                        position: "absolute",
-                        width: "100%",
-                        height: "100%",
-                        backfaceVisibility: "hidden",
-                        background: "var(--bg-card)",
-                        borderRadius: "var(--radius-lg)",
-                        border: "1px solid var(--border-light)",
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        gap: "1.5rem",
-                        boxShadow: "0 10px 30px rgba(0,0,0,0.2)"
-                    }}>
-                        <SiCodechef color="#5B4638" style={{ fontSize: "5rem" }} />
-                        <div style={{ textAlign: "center" }}>
-                            <h4 style={{ fontSize: "1.8rem", margin: "0 0 0.5rem", color: "var(--text-primary)" }}>CodeChef</h4>
-                            <span style={{ color: "var(--text-secondary)", fontSize: "1.1rem" }}>@kakarotto007</span>
-                        </div>
-                        <span style={{ fontSize: "0.9rem", color: "var(--accent-cyan)", opacity: 0.8 }}>Hover to see stats</span>
-                    </div>
-
-                    {/* Back Face */}
-                    <div style={{ 
-                        position: "absolute",
-                        width: "100%",
-                        height: "100%",
-                        backfaceVisibility: "hidden",
-                        transform: "rotateY(180deg)",
-                        background: "var(--bg-card)", 
-                        borderRadius: "var(--radius-lg)",
-                        border: "1px solid #1E7D22", 
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        gap: "1rem",
-                        boxShadow: "0 10px 30px rgba(0,0,0,0.2)"
-                    }}>
-                    <h4 style={{ fontSize: "1.5rem", color: "var(--text-primary)" }}>Current Rating</h4>
-                    <div style={{ fontSize: "3.5rem", fontWeight: "700", color: "#18b6bbff" }}>1619</div>
-                    <div style={{ 
-                        background: "rgba(30, 125, 34, 0.1)", 
-                        color: "#1E7D22", 
-                        padding: "0.5rem 1.5rem", 
-                        borderRadius: "50px", 
-                        fontWeight: "600",
-                        textTransform: "uppercase",
-                        letterSpacing: "1px"
-                    }}>
-                    ⭐⭐⭐
-                    </div>
-                    <div style={{ marginTop: "1rem", fontSize: "0.9rem", color: "var(--text-secondary)" }}>
-                        Max: <span style={{ color: "#1E7D22" }}>1599</span>
-                    </div>
-                    
-                    <a 
-                        href="https://www.codechef.com/users/kakarotto007" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        style={{ 
-                            marginTop: "1rem", 
-                            color: "var(--text-primary)", 
-                            textDecoration: "underline",
-                            fontSize: "0.9rem"
-                        }}
-                    >
-                        View Profile ↗
-                    </a>
-                    </div>
-                </motion.div>
-            </div>
-
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "2rem",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {PROFILES.map((profile) => (
+            <ProfileCard
+              key={profile.id}
+              profile={profile}
+              stats={profiles[profile.id]}
+              isLoading={isLoading}
+            />
+          ))}
         </div>
 
-        {/* Heatmap Section */}
-        <motion.div 
-            whileHover={{ scale: 1.01 }}
-            style={{ 
-                background: "var(--bg-card)", 
-                padding: "2rem", 
-                borderRadius: "var(--radius-md)", 
-                border: "1px solid var(--border-light)",
-                maxWidth: "750px", 
-                width: "100%",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                marginTop: "1rem"
-            }}
+        <MotionDiv
+          whileHover={{ scale: 1.01 }}
+          style={{
+            background: "var(--bg-card)",
+            padding: "2rem",
+            borderRadius: "var(--radius-md)",
+            border: "1px solid var(--border-light)",
+            maxWidth: "750px",
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            marginTop: "1rem",
+          }}
         >
-            <h4 style={{ textAlign: "center", marginBottom: "1.5rem", color: "var(--text-secondary)" }}>
-                 LeetCode Submissions
-            </h4>
-            
-            <img 
-                src={`https://leetcard.jacoblin.cool/Kakarotto007?theme=${theme}&font=Inter&ext=heatmap`}
-                alt="LeetCode Heatmap" 
-                style={{ 
-                    width: "100%", 
-                    borderRadius: "4px"
-                }} 
-            />
-        </motion.div>
-
+          <h4 style={{ textAlign: "center", marginBottom: "1.5rem", color: "var(--text-secondary)" }}>
+            LeetCode Submissions
+          </h4>
+          <img
+            src={`https://leetcard.jacoblin.cool/Kakarotto007?theme=${theme}&font=Inter&ext=heatmap`}
+            alt="LeetCode Heatmap"
+            style={{ width: "100%", borderRadius: "4px" }}
+          />
+        </MotionDiv>
       </div>
     </section>
   );

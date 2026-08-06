@@ -1,5 +1,14 @@
 # React + Vite
 
+## Live competitive-programming ratings
+
+The profile cards fetch their ratings from the same-origin `/api/ratings` endpoint.
+It is a Vercel serverless function that reads the public Codeforces, LeetCode,
+AtCoder, and CodeChef profiles and returns one normalized response. The response
+is revalidated on every visit and shared-cached by Vercel for 15 minutes to avoid
+rate-limiting the profile platforms. `npm run dev` exposes the same endpoint
+through Vite middleware, so the feature also works locally.
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
