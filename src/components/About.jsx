@@ -122,7 +122,7 @@ const About = () => {
                     color: "var(--text-primary)",
                     margin: 0
                 }}>
-                    I'm a 4th-year <span style={{ color: "var(--accent-green)" }}>Computer Science Engineering</span> student.
+                    I'm a <span style={{ color: "var(--accent-green)" }}>Computer Science Engineer.</span>
                 </h3>
                 
                 <p style={{ fontSize: "1.1rem", lineHeight: "1.6", color: "var(--text-secondary)" }}>

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { SiLeetcode, SiCodechef, SiCodeforces } from "react-icons/si";
 import { useTheme } from "../context/ThemeContext";
+import AtCoder from "../assets/AtCoder.png";
 
 const PROFILES = [
   {
@@ -53,7 +54,7 @@ const PROFILES = [
     id: "atcoder",
     name: "AtCoder",
     handle: "@Kakarotto007",
-    iconLabel: "⌨️",
+    image: AtCoder,
     iconColor: "#fff",
     ratingColor: "#804000",
     rankColor: "#804000",
@@ -125,6 +126,7 @@ const MotionDiv = motion.div;
 const ProfileCard = ({ profile, stats, isLoading }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const Icon = profile.icon;
+  const Image = profile.image;
   const isAvailable = stats?.available;
   const rankColor = profile.rankColors?.[stats?.rank] ?? profile.rankColor;
   const accentColor = profile.rankColors ? rankColor : profile.ratingColor;
@@ -137,12 +139,24 @@ const ProfileCard = ({ profile, stats, isLoading }) => {
   const secondaryRating = stats?.[secondaryField];
 
   return (
-    <div className="profile-card" style={{ perspective: "1000px", width: "min(300px, 100%)", height: "350px" }}>
+    <div
+      className="profile-card"
+      style={{
+        perspective: "1000px",
+        width: "min(300px, 100%)",
+        height: "350px",
+      }}
+    >
       <MotionDiv
         initial={false}
         animate={{ rotateY: isFlipped ? 180 : 0 }}
         whileHover={{ rotateY: 180 }}
-        transition={{ duration: 0.6, type: "spring", stiffness: 260, damping: 20 }}
+        transition={{
+          duration: 0.6,
+          type: "spring",
+          stiffness: 260,
+          damping: 20,
+        }}
         style={{
           width: "100%",
           height: "100%",
@@ -157,12 +171,18 @@ const ProfileCard = ({ profile, stats, isLoading }) => {
             gap: "1.5rem",
           }}
         >
-          {Icon ? (
-            <Icon color={profile.iconColor} style={{ fontSize: "5rem" }} />
+          {Image ? (
+            <img
+              src={Image}
+              alt={profile.name}
+              style={{
+                width: "5rem",
+                height: "5rem",
+                objectFit: "contain",
+              }}
+            />
           ) : (
-            <div style={{ fontSize: "5rem", color: profile.iconColor }}>
-              {profile.iconLabel}
-            </div>
+            <Icon color={profile.iconColor} style={{ fontSize: "5rem" }} />
           )}
           <div style={{ textAlign: "center" }}>
             <h4
@@ -174,11 +194,20 @@ const ProfileCard = ({ profile, stats, isLoading }) => {
             >
               {profile.name}
             </h4>
-            <span style={{ color: "var(--text-secondary)", fontSize: "1.1rem" }}>
+            <span
+              style={{ color: "var(--text-secondary)", fontSize: "1.1rem" }}
+            >
               {profile.handle}
             </span>
           </div>
-          <span className="profile-card-hint" style={{ fontSize: "0.9rem", color: "var(--accent-cyan)", opacity: 0.8 }}>
+          <span
+            className="profile-card-hint"
+            style={{
+              fontSize: "0.9rem",
+              color: "var(--accent-cyan)",
+              opacity: 0.8,
+            }}
+          >
             Hover to see live stats
           </span>
           <button
@@ -202,7 +231,11 @@ const ProfileCard = ({ profile, stats, isLoading }) => {
           </h4>
           <div
             aria-live="polite"
-            style={{ fontSize: "3.5rem", fontWeight: "700", color: accentColor }}
+            style={{
+              fontSize: "3.5rem",
+              fontWeight: "700",
+              color: accentColor,
+            }}
           >
             {isLoading ? "…" : formatRating(primaryRating)}
           </div>
@@ -220,15 +253,36 @@ const ProfileCard = ({ profile, stats, isLoading }) => {
               alignItems: "center",
             }}
           >
-            {isLoading ? "Refreshing" : isAvailable ? stats.rank : "Unavailable"}
+            {isLoading
+              ? "Refreshing"
+              : isAvailable
+                ? stats.rank
+                : "Unavailable"}
           </div>
-          {isAvailable && secondaryRating !== null && secondaryRating !== undefined && (
-            <div style={{ marginTop: "1rem", fontSize: "0.9rem", color: "var(--text-secondary)" }}>
-              {secondaryLabel}: <span style={{ color: rankColor }}>{formatRating(secondaryRating)}</span>
-            </div>
-          )}
+          {isAvailable &&
+            secondaryRating !== null &&
+            secondaryRating !== undefined && (
+              <div
+                style={{
+                  marginTop: "1rem",
+                  fontSize: "0.9rem",
+                  color: "var(--text-secondary)",
+                }}
+              >
+                {secondaryLabel}:{" "}
+                <span style={{ color: rankColor }}>
+                  {formatRating(secondaryRating)}
+                </span>
+              </div>
+            )}
           {!isLoading && !isAvailable && (
-            <div style={{ marginTop: "1rem", fontSize: "0.85rem", color: "var(--text-secondary)" }}>
+            <div
+              style={{
+                marginTop: "1rem",
+                fontSize: "0.85rem",
+                color: "var(--text-secondary)",
+              }}
+            >
               Couldn&apos;t refresh right now
             </div>
           )}
